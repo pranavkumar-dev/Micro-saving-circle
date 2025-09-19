@@ -1,0 +1,55 @@
+{
+  "emulators": {
+    "default": {
+      "port": 3569,
+      "serviceAccount": "emulator-account"
+    }
+  },
+  "contracts": {
+    "MicroSavingsCircles": {
+      "source": "./contracts/MicroSavingsCircles.cdc",
+      "aliases": {
+        "emulator": "0xf8d6e0586b0a20c7",
+        "testnet": ""
+      }
+    },
+    "FungibleToken": {
+      "aliases": {
+        "emulator": "0xee82856bf20e2aa6",
+        "testnet": "0x9a0766d93b6608b7"
+      }
+    },
+    "FlowToken": {
+      "aliases": {
+        "emulator": "0x0ae53cb6e3f42a79",
+        "testnet": "0x7e60df042a9c0868"
+      }
+    }
+  },
+  "deployments": {
+    "emulator": {
+      "emulator-account": [
+        "MicroSavingsCircles"
+      ]
+    },
+    "testnet": {
+      "testnet-account": [
+        "MicroSavingsCircles"
+      ]
+    }
+  },
+  "accounts": {
+    "emulator-account": {
+      "address": "0xf8d6e0586b0a20c7",
+      "key": ""
+    },
+    "testnet-account": {
+      "address": "",
+      "key": ""
+    }
+  },
+  "networks": {
+    "emulator": "127.0.0.1:3569",
+    "testnet": "access.devnet.nodes.onflow.org:9000"
+  }
+}
