@@ -41,7 +41,13 @@
   "accounts": {
     "emulator-account": {
       "address": "0xf8d6e0586b0a20c7",
-      "key": ""
+      "key": {
+        "type": "hex",
+        "index": 0,
+        "signatureAlgorithm": "ECDSA_P256",
+        "hashAlgorithm": "SHA3_256",
+        "privateKey": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+      }
     },
     "testnet-account": {
       "address": "",
