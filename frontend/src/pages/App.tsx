@@ -7,8 +7,23 @@ import '../fclConfig'
 export default function App() {
   const [user, setUser] = useState<any>(null)
   const [stats, setStats] = useState({ totalCircles: 0, activeMembers: 0, totalDeposits: 0 })
+  const [isConnecting, setIsConnecting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => fcl.currentUser().subscribe(setUser), [])
+
+  const handleConnect = async () => {
+    try {
+      setIsConnecting(true)
+      setError(null)
+      await fcl.authenticate()
+    } catch (err) {
+      console.error('Wallet connection failed:', err)
+      setError('Failed to connect wallet. Please try again.')
+    } finally {
+      setIsConnecting(false)
+    }
+  }
 
   // Mock stats - in real app, fetch from contract
   useEffect(() => {
@@ -35,10 +50,11 @@ export default function App() {
               <div className="mb-12">
                 <p className="text-lg text-gray-500 mb-4">Connect your wallet to get started</p>
                 <button 
-                  onClick={() => fcl.authenticate()} 
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                  onClick={handleConnect}
+                  disabled={isConnecting}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
-                  Connect Wallet
+                  {isConnecting ? 'Connecting...' : 'Connect Wallet'}
                 </button>
               </div>
             ) : (
@@ -145,14 +161,31 @@ export default function App() {
             </div>
           ) : (
             <button 
-              onClick={() => fcl.authenticate()} 
-              className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+              onClick={handleConnect}
+              disabled={isConnecting}
+              className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
-              Connect Wallet to Start
+              {isConnecting ? 'Connecting...' : 'Connect Wallet to Start'}
             </button>
           )}
         </div>
       </div>
+      
+      {/* Error Display */}
+      {error && (
+        <div className="fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative z-50">
+          <span className="block sm:inline">{error}</span>
+          <button
+            onClick={() => setError(null)}
+            className="absolute top-0 bottom-0 right-0 px-4 py-3"
+          >
+            <span className="sr-only">Dismiss</span>
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   )
 }

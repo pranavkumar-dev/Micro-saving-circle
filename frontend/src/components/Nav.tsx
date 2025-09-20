@@ -6,11 +6,35 @@ import '../fclConfig'
 export default function Nav() {
   const [user, setUser] = useState<any>(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isConnecting, setIsConnecting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const location = useLocation()
   
   useEffect(() => fcl.currentUser().subscribe(setUser), [])
 
   const isActive = (path: string) => location.pathname === path
+
+  const handleConnect = async () => {
+    try {
+      setIsConnecting(true)
+      setError(null)
+      await fcl.authenticate()
+    } catch (err) {
+      console.error('Wallet connection failed:', err)
+      setError('Failed to connect wallet. Please try again.')
+    } finally {
+      setIsConnecting(false)
+    }
+  }
+
+  const handleDisconnect = async () => {
+    try {
+      await fcl.unauthenticate()
+      setError(null)
+    } catch (err) {
+      console.error('Wallet disconnection failed:', err)
+    }
+  }
 
   return (
     <nav className="w-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg">
@@ -71,7 +95,7 @@ export default function Nav() {
                   <span className="ml-1 font-mono">{user.addr.slice(0,6)}...{user.addr.slice(-4)}</span>
                 </div>
                 <button 
-                  onClick={() => fcl.unauthenticate()} 
+                  onClick={handleDisconnect} 
                   className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
                 >
                   Disconnect
@@ -79,10 +103,11 @@ export default function Nav() {
               </div>
             ) : (
               <button 
-                onClick={() => fcl.authenticate()} 
-                className="bg-white text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200 shadow-md"
+                onClick={handleConnect}
+                disabled={isConnecting}
+                className="bg-white text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Connect Wallet
+                {isConnecting ? 'Connecting...' : 'Connect Wallet'}
               </button>
             )}
           </div>
@@ -139,7 +164,7 @@ export default function Nav() {
                     </div>
                     <button 
                       onClick={() => {
-                        fcl.unauthenticate()
+                        handleDisconnect()
                         setIsMenuOpen(false)
                       }} 
                       className="w-full bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded-md text-sm font-medium"
@@ -150,12 +175,13 @@ export default function Nav() {
                 ) : (
                   <button 
                     onClick={() => {
-                      fcl.authenticate()
+                      handleConnect()
                       setIsMenuOpen(false)
-                    }} 
-                    className="w-full bg-white text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium mx-3"
+                    }}
+                    disabled={isConnecting}
+                    className="w-full bg-white text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium mx-3 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Connect Wallet
+                    {isConnecting ? 'Connecting...' : 'Connect Wallet'}
                   </button>
                 )}
               </div>
@@ -163,6 +189,22 @@ export default function Nav() {
           </div>
         )}
       </div>
+      
+      {/* Error Display */}
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-4 mb-2">
+          <span className="block sm:inline">{error}</span>
+          <button
+            onClick={() => setError(null)}
+            className="absolute top-0 bottom-0 right-0 px-4 py-3"
+          >
+            <span className="sr-only">Dismiss</span>
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
     </nav>
   )
 }
