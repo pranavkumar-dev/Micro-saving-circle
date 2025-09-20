@@ -1,19 +1,19 @@
-pub contract MicroSavingsCircles {
+access(all) contract MicroSavingsCircles {
 
-	import FungibleToken from 0xFungibleToken
-	import FlowToken from 0xFlowToken
+	import FungibleToken from 0xee82856bf20e2aa6
+	import FlowToken from 0x0ae53cb6e3f42a79
 
-	pub let FlowTokenReceiverPublicPath: PublicPath
+	access(all) let FlowTokenReceiverPublicPath: PublicPath
 
-	pub struct CircleView {
-		pub let circleId: UInt64
-		pub let poolSize: UFix64
-		pub let members: [Address]
-		pub let maxMembers: UInt8
-		pub let totalRounds: UInt8
-		pub let currentRound: UInt8
-		pub let payoutHistory: [Address?]
-		pub let currentRoundDeposited: {Address: Bool}
+	access(all) struct CircleView {
+		access(all) let circleId: UInt64
+		access(all) let poolSize: UFix64
+		access(all) let members: [Address]
+		access(all) let maxMembers: UInt8
+		access(all) let totalRounds: UInt8
+		access(all) let currentRound: UInt8
+		access(all) let payoutHistory: [Address?]
+		access(all) let currentRoundDeposited: {Address: Bool}
 
 		init(
 			circleId: UInt64,
@@ -57,16 +57,16 @@ pub contract MicroSavingsCircles {
 		}
 	}
 
-	pub resource Circle {
-		pub let circleId: UInt64
-		pub let poolSize: UFix64
-		pub let maxMembers: UInt8
-		pub var members: [Address]
-		pub let totalRounds: UInt8
-		pub var currentRound: UInt8
-		pub var payoutHistory: [Address?]
-		pub var hasReceivedPayout: {Address: Bool}
-		pub var hasDepositedThisRound: {Address: Bool}
+	access(all) resource Circle {
+		access(all) let circleId: UInt64
+		access(all) let poolSize: UFix64
+		access(all) let maxMembers: UInt8
+		access(all) var members: [Address]
+		access(all) let totalRounds: UInt8
+		access(all) var currentRound: UInt8
+		access(all) var payoutHistory: [Address?]
+		access(all) var hasReceivedPayout: {Address: Bool}
+		access(all) var hasDepositedThisRound: {Address: Bool}
 		access(self) var escrow: @EscrowVault
 
 		init(circleId: UInt64, poolSize: UFix64, maxMembers: UInt8) {
@@ -86,7 +86,7 @@ pub contract MicroSavingsCircles {
 			self.escrow <- create EscrowVault()
 		}
 
-		pub fun join(member: Address) {
+		access(all) fun join(member: Address) {
 			pre {
 				self.members.length < Int(self.maxMembers): "Circle is full"
 				self.members.contains(member) == false: "Member already joined"
@@ -95,7 +95,7 @@ pub contract MicroSavingsCircles {
 			self.hasReceivedPayout[member] = false
 		}
 
-		pub fun deposit(from: @FungibleToken.Vault, depositor: Address) {
+		access(all) fun deposit(from: @FungibleToken.Vault, depositor: Address) {
 			pre {
 				self.members.contains(depositor): "Depositor is not a member"
 				self.hasDepositedThisRound[depositor] != true: "Already deposited this round"
@@ -105,7 +105,7 @@ pub contract MicroSavingsCircles {
 			self.hasDepositedThisRound[depositor] = true
 		}
 
-		pub fun canPayout(): Bool {
+		access(all) fun canPayout(): Bool {
 			if self.members.length != Int(self.maxMembers) { return false }
 			var allDeposited: Bool = true
 			for m in self.members {
@@ -117,13 +117,13 @@ pub contract MicroSavingsCircles {
 			return allDeposited
 		}
 
-		pub fun nextPayoutAddress(): Address? {
+		access(all) fun nextPayoutAddress(): Address? {
 			if self.currentRound >= self.totalRounds { return nil }
 			let idx: Int = Int(self.currentRound)
 			return self.members[idx]
 		}
 
-		pub fun payout() {
+		access(all) fun payout() {
 			pre {
 				self.canPayout(): "All members must deposit before payout"
 			}
@@ -146,7 +146,7 @@ pub contract MicroSavingsCircles {
 			self.hasDepositedThisRound = {}
 		}
 
-		pub fun asView(): MicroSavingsCircles.CircleView {
+		access(all) fun asView(): MicroSavingsCircles.CircleView {
 			return MicroSavingsCircles.CircleView(
 				circleId: self.circleId,
 				poolSize: self.poolSize,
@@ -164,44 +164,44 @@ pub contract MicroSavingsCircles {
 		}
 	}
 
-	pub var circles: {UInt64: @Circle}
-	pub var nextCircleId: UInt64
+	access(all) var circles: {UInt64: @Circle}
+	access(all) var nextCircleId: UInt64
 
-	pub fun createCircle(poolSize: UFix64, maxMembers: UInt8): UInt64 {
+	access(all) fun createCircle(poolSize: UFix64, maxMembers: UInt8): UInt64 {
 		let id = self.nextCircleId
 		self.circles[id] <-! create Circle(circleId: id, poolSize: poolSize, maxMembers: maxMembers)
 		self.nextCircleId = self.nextCircleId + 1
 		return id
 	}
 
-	pub fun joinCircle(circleId: UInt64, member: Address) {
+	access(all) fun joinCircle(circleId: UInt64, member: Address) {
 		let circle <- self.circles.remove(key: circleId)
 			?? panic("Circle not found")
 		circle.join(member: member)
 		self.circles[circleId] <-! circle
 	}
 
-	pub fun deposit(circleId: UInt64, from: @FungibleToken.Vault, depositor: Address) {
+	access(all) fun deposit(circleId: UInt64, from: @FungibleToken.Vault, depositor: Address) {
 		let circle <- self.circles.remove(key: circleId)
 			?? panic("Circle not found")
 		circle.deposit(from: <-from, depositor: depositor)
 		self.circles[circleId] <-! circle
 	}
 
-	pub fun payout(circleId: UInt64) {
+	access(all) fun payout(circleId: UInt64) {
 		let circle <- self.circles.remove(key: circleId)
 			?? panic("Circle not found")
 		circle.payout()
 		self.circles[circleId] <-! circle
 	}
 
-	pub fun checkStatus(circleId: UInt64): CircleView {
+	access(all) fun checkStatus(circleId: UInt64): CircleView {
 		let ref = &self.circles[circleId] as &Circle
 		return ref.asView()
 	}
 
 	init() {
-		self.FlowTokenReceiverPublicPath = /public/flowTokenReceiver
+		self.FlowTokenReceiverPublicPath = /access(all)lic/flowTokenReceiver
 		self.circles = {}
 		self.nextCircleId = 1
 	}

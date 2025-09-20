@@ -6,13 +6,7 @@
     }
   },
   "contracts": {
-    "MicroSavingsCircles": {
-      "source": "./contracts/MicroSavingsCircles.cdc",
-      "aliases": {
-        "emulator": "0xf8d6e0586b0a20c7",
-        "testnet": ""
-      }
-    },
+    "MicroSavingsCircles": "./contracts/MicroSavingsCircles.cdc",
     "FungibleToken": {
       "aliases": {
         "emulator": "0xee82856bf20e2aa6",
@@ -31,11 +25,6 @@
       "emulator-account": [
         "MicroSavingsCircles"
       ]
-    },
-    "testnet": {
-      "testnet-account": [
-        "MicroSavingsCircles"
-      ]
     }
   },
   "accounts": {
@@ -48,10 +37,6 @@
         "hashAlgorithm": "SHA3_256",
         "privateKey": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
       }
-    },
-    "testnet-account": {
-      "address": "",
-      "key": ""
     }
   },
   "networks": {
