@@ -1,4 +1,5 @@
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 import * as fcl from '@onflow/fcl'
 import '../fclConfig'
 import { useState } from 'react'
@@ -86,6 +87,7 @@ export default function CreateCircle() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     )
   }
@@ -189,6 +191,7 @@ export default function CreateCircle() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

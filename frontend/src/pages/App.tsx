@@ -1,4 +1,5 @@
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 import { Link } from 'react-router-dom'
 import * as fcl from '@onflow/fcl'
 import { useEffect, useState } from 'react'
@@ -186,6 +187,8 @@ export default function App() {
           </button>
         </div>
       )}
+      
+      <Footer />
     </div>
   )
 }

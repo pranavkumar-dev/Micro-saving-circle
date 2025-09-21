@@ -1,4 +1,5 @@
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 import * as fcl from '@onflow/fcl'
 import '../fclConfig'
 import { useEffect, useState } from 'react'
@@ -106,11 +107,12 @@ export default function JoinCircle() {
           <div className="text-center py-16">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
             <p className="text-gray-600">Loading available circles...</p>
-          </div>
         </div>
       </div>
-    )
-  }
+      <Footer />
+    </div>
+  )
+}
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
@@ -244,8 +246,9 @@ export default function JoinCircle() {
             </button>
           </div>
         )}
+        </div>
+        <Footer />
       </div>
-    </div>
-  )
-}
+    )
+  }
 

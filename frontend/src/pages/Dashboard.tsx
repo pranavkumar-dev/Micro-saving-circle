@@ -1,4 +1,5 @@
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 import * as fcl from '@onflow/fcl'
 import '../fclConfig'
 import { useParams } from 'react-router-dom'
@@ -44,6 +45,7 @@ export default function Dashboard() {
     <div>
       <Nav />
       <div className="max-w-3xl mx-auto p-6">Loading...</div>
+      <Footer />
     </div>
   )
 
@@ -103,6 +105,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
