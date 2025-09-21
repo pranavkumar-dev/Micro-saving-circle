@@ -32,43 +32,55 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+    <div className="min-h-screen relative">
       <Nav />
       
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Micro-Savings Circles</span>
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 floating">
+              Welcome to <span className="rainbow-text">Micro-Savings Circles</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
               Join trustless savings groups, make regular deposits, and take turns receiving the pooled payout. 
               Built on Flow blockchain for secure, transparent community finance.
             </p>
             
             {!user?.addr ? (
               <div className="mb-12">
-                <p className="text-lg text-gray-500 mb-4">Connect your wallet to get started</p>
+                <p className="text-lg text-white/80 mb-6">Connect your wallet to get started</p>
                 <button 
                   onClick={handleConnect}
                   disabled={isConnecting}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="btn-primary text-lg px-8 py-4 glow-effect"
                 >
-                  {isConnecting ? 'Connecting...' : 'Connect Wallet'}
+                  {isConnecting ? (
+                    <div className="flex items-center">
+                      <div className="loading-dots mr-2">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                      Connecting...
+                    </div>
+                  ) : (
+                    '🔗 Connect Wallet'
+                  )}
                 </button>
               </div>
             ) : (
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
                 <Link 
                   to="/create" 
-                  className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                  className="btn-success text-lg px-8 py-4 floating"
                 >
                   🚀 Create Circle
                 </Link>
                 <Link 
                   to="/join" 
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                  className="btn-secondary text-lg px-8 py-4 floating"
+                  style={{ animationDelay: '0.5s' }}
                 >
                   🔍 Join Circle
                 </Link>
@@ -79,96 +91,110 @@ export default function App() {
       </div>
 
       {/* Stats Section */}
-      <div className="bg-white py-16">
+      <div className="py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Platform Statistics</h2>
-            <p className="text-lg text-gray-600">Join thousands of users building wealth together</p>
+            <h2 className="text-3xl font-bold text-white mb-4 gradient-text">Platform Statistics</h2>
+            <p className="text-lg text-white/80">Join thousands of users building wealth together</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
-              <div className="text-4xl font-bold text-blue-600 mb-2">{stats.totalCircles}</div>
-              <div className="text-lg text-gray-700">Active Circles</div>
+            <div className="glass-card text-center p-8 floating">
+              <div className="text-5xl font-bold text-primary-400 mb-3 glow-effect">{stats.totalCircles}</div>
+              <div className="text-lg text-white font-semibold">Active Circles</div>
             </div>
-            <div className="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
-              <div className="text-4xl font-bold text-green-600 mb-2">{stats.activeMembers}</div>
-              <div className="text-lg text-gray-700">Active Members</div>
+            <div className="glass-card text-center p-8 floating" style={{ animationDelay: '0.3s' }}>
+              <div className="text-5xl font-bold text-success-400 mb-3 glow-effect">{stats.activeMembers}</div>
+              <div className="text-lg text-white font-semibold">Active Members</div>
             </div>
-            <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
-              <div className="text-4xl font-bold text-purple-600 mb-2">{stats.totalDeposits}</div>
-              <div className="text-lg text-gray-700">Total Deposits (FLOW)</div>
+            <div className="glass-card text-center p-8 floating" style={{ animationDelay: '0.6s' }}>
+              <div className="text-5xl font-bold text-secondary-400 mb-3 glow-effect">{stats.totalDeposits}</div>
+              <div className="text-lg text-white font-semibold">Total Deposits (FLOW)</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Features Section */}
-      <div className="py-16 bg-gray-50">
+      <div className="py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">How It Works</h2>
-            <p className="text-lg text-gray-600">Simple, secure, and transparent savings circles</p>
+            <h2 className="text-3xl font-bold text-white mb-4 gradient-text">How It Works</h2>
+            <p className="text-lg text-white/80">Simple, secure, and transparent savings circles</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">👥</span>
+            <div className="glass-card text-center p-8 floating">
+              <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-6 glow-effect">
+                <span className="text-3xl">👥</span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Create or Join</h3>
-              <p className="text-gray-600">Start a new savings circle or join an existing one with your preferred pool size and member count.</p>
+              <h3 className="text-xl font-semibold text-white mb-4">Create or Join</h3>
+              <p className="text-white/80 leading-relaxed">Start a new savings circle or join an existing one with your preferred pool size and member count.</p>
             </div>
             
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">💰</span>
+            <div className="glass-card text-center p-8 floating" style={{ animationDelay: '0.3s' }}>
+              <div className="w-20 h-20 bg-gradient-to-br from-success-400 to-success-600 rounded-full flex items-center justify-center mx-auto mb-6 glow-effect">
+                <span className="text-3xl">💰</span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Regular Deposits</h3>
-              <p className="text-gray-600">Make scheduled deposits each round. The smart contract tracks who has paid and who hasn't.</p>
+              <h3 className="text-xl font-semibold text-white mb-4">Regular Deposits</h3>
+              <p className="text-white/80 leading-relaxed">Make scheduled deposits each round. The smart contract tracks who has paid and who hasn't.</p>
             </div>
             
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🎯</span>
+            <div className="glass-card text-center p-8 floating" style={{ animationDelay: '0.6s' }}>
+              <div className="w-20 h-20 bg-gradient-to-br from-secondary-400 to-secondary-600 rounded-full flex items-center justify-center mx-auto mb-6 glow-effect">
+                <span className="text-3xl">🎯</span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Rotating Payouts</h3>
-              <p className="text-gray-600">Once all members deposit, one member receives the full pool. The cycle continues until everyone gets paid.</p>
+              <h3 className="text-xl font-semibold text-white mb-4">Rotating Payouts</h3>
+              <p className="text-white/80 leading-relaxed">Once all members deposit, one member receives the full pool. The cycle continues until everyone gets paid.</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 py-16">
+      <div className="py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Saving?</h2>
-          <p className="text-xl text-blue-100 mb-8">Join the future of community finance today</p>
-          
-          {user?.addr ? (
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                to="/create" 
-                className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+          <div className="glass-card p-12">
+            <h2 className="text-4xl font-bold text-white mb-6 gradient-text">Ready to Start Saving?</h2>
+            <p className="text-xl text-white/80 mb-8">Join the future of community finance today</p>
+            
+            {user?.addr ? (
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  to="/create" 
+                  className="btn-success text-lg px-8 py-4 floating"
+                >
+                  ✨ Create Your Circle
+                </Link>
+                <Link 
+                  to="/join" 
+                  className="btn-secondary text-lg px-8 py-4 floating"
+                  style={{ animationDelay: '0.3s' }}
+                >
+                  🔍 Browse Circles
+                </Link>
+              </div>
+            ) : (
+              <button 
+                onClick={handleConnect}
+                disabled={isConnecting}
+                className="btn-primary text-lg px-8 py-4 glow-effect"
               >
-                Create Your Circle
-              </Link>
-              <Link 
-                to="/join" 
-                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-200"
-              >
-                Browse Circles
-              </Link>
-            </div>
-          ) : (
-            <button 
-              onClick={handleConnect}
-              disabled={isConnecting}
-              className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-            >
-              {isConnecting ? 'Connecting...' : 'Connect Wallet to Start'}
-            </button>
-          )}
+                {isConnecting ? (
+                  <div className="flex items-center">
+                    <div className="loading-dots mr-2">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                    Connecting...
+                  </div>
+                ) : (
+                  '🔗 Connect Wallet to Start'
+                )}
+              </button>
+            )}
+          </div>
         </div>
       </div>
       
