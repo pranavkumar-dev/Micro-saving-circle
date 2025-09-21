@@ -37,16 +37,16 @@ export default function Nav() {
   }
 
   return (
-    <nav className="w-full glass-card shadow-xl border-b border-white/20">
+    <nav className="w-full bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 shadow-xl border-b-2 border-white/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo and Brand */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-400 to-secondary-400 rounded-full flex items-center justify-center glow-effect">
+              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center glow-effect border border-white/30">
                 <span className="text-white font-bold text-lg">💸</span>
               </div>
-              <span className="text-white font-bold text-xl gradient-text">Micro-Savings Circles</span>
+              <span className="text-white font-bold text-xl rainbow-text">Micro-Savings Circles</span>
             </Link>
           </div>
 
@@ -57,8 +57,8 @@ export default function Nav() {
                 to="/" 
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
                   isActive('/') 
-                    ? 'bg-white/20 text-white shadow-lg' 
-                    : 'text-white/80 hover:bg-white/10 hover:text-white hover:shadow-md'
+                    ? 'bg-white/30 text-white shadow-lg backdrop-blur-sm border border-white/20' 
+                    : 'text-white/90 hover:bg-white/20 hover:text-white hover:shadow-md backdrop-blur-sm border border-transparent hover:border-white/10'
                 }`}
               >
                 🏠 Home
@@ -67,8 +67,8 @@ export default function Nav() {
                 to="/create" 
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
                   isActive('/create') 
-                    ? 'bg-white/20 text-white shadow-lg' 
-                    : 'text-white/80 hover:bg-white/10 hover:text-white hover:shadow-md'
+                    ? 'bg-white/30 text-white shadow-lg backdrop-blur-sm border border-white/20' 
+                    : 'text-white/90 hover:bg-white/20 hover:text-white hover:shadow-md backdrop-blur-sm border border-transparent hover:border-white/10'
                 }`}
               >
                 🚀 Create
@@ -77,8 +77,8 @@ export default function Nav() {
                 to="/join" 
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
                   isActive('/join') 
-                    ? 'bg-white/20 text-white shadow-lg' 
-                    : 'text-white/80 hover:bg-white/10 hover:text-white hover:shadow-md'
+                    ? 'bg-white/30 text-white shadow-lg backdrop-blur-sm border border-white/20' 
+                    : 'text-white/90 hover:bg-white/20 hover:text-white hover:shadow-md backdrop-blur-sm border border-transparent hover:border-white/10'
                 }`}
               >
                 🔍 Join
@@ -91,12 +91,12 @@ export default function Nav() {
             {user?.addr ? (
               <div className="flex items-center space-x-3">
                 <div className="text-white text-sm">
-                  <span className="text-white/60">Connected:</span>
-                  <span className="ml-1 font-mono text-primary-300">{user.addr.slice(0,6)}...{user.addr.slice(-4)}</span>
+                  <span className="text-white/70">Connected:</span>
+                  <span className="ml-1 font-mono text-yellow-300 bg-white/10 px-2 py-1 rounded">{user.addr.slice(0,6)}...{user.addr.slice(-4)}</span>
                 </div>
                 <button 
                   onClick={handleDisconnect} 
-                  className="btn-danger text-sm px-4 py-2"
+                  className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 backdrop-blur-sm border border-white/20 hover:border-white/30"
                 >
                   Disconnect
                 </button>
@@ -105,7 +105,7 @@ export default function Nav() {
               <button 
                 onClick={handleConnect}
                 disabled={isConnecting}
-                className="btn-primary text-sm px-6 py-2"
+                className="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-200 backdrop-blur-sm border border-white/20 hover:border-white/30 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isConnecting ? (
                   <div className="flex items-center">
