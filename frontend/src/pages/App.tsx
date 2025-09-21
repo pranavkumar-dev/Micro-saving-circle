@@ -94,8 +94,8 @@ export default function App() {
       <div className="py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4 gradient-text">Platform Statistics</h2>
-            <p className="text-lg text-white/80">Join thousands of users building wealth together</p>
+            <h2 className="text-3xl font-bold text-white mb-4 rainbow-text drop-shadow-lg">Platform Statistics</h2>
+            <p className="text-lg text-white/90 drop-shadow-md">Join thousands of users building wealth together</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -119,8 +119,8 @@ export default function App() {
       <div className="py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4 gradient-text">How It Works</h2>
-            <p className="text-lg text-white/80">Simple, secure, and transparent savings circles</p>
+            <h2 className="text-3xl font-bold text-white mb-4 rainbow-text drop-shadow-lg">How It Works</h2>
+            <p className="text-lg text-white/90 drop-shadow-md">Simple, secure, and transparent savings circles</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -155,8 +155,8 @@ export default function App() {
       <div className="py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="glass-card p-12">
-            <h2 className="text-4xl font-bold text-white mb-6 gradient-text">Ready to Start Saving?</h2>
-            <p className="text-xl text-white/80 mb-8">Join the future of community finance today</p>
+            <h2 className="text-4xl font-bold text-white mb-6 rainbow-text drop-shadow-lg">Ready to Start Saving?</h2>
+            <p className="text-xl text-white/90 mb-8 drop-shadow-md">Join the future of community finance today</p>
             
             {user?.addr ? (
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
