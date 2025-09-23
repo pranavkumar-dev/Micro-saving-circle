@@ -203,18 +203,28 @@ export default function CreateCircle() {
                 <div className="relative">
                   <input 
                     type="number"
-                    step="0.1"
+                    step="0.01"
                     min="0.1"
+                    max="1000"
+                    inputMode="decimal"
                     value={poolSize} 
                     onChange={e => setPoolSize(e.target.value)}
                     onFocus={() => setInputFocus('poolSize')}
-                    onBlur={() => setInputFocus(null)}
+                    onBlur={() => {
+                      setInputFocus(null)
+                      if (poolSize && !isNaN(parseFloat(poolSize))) {
+                        const normalized = Math.min(1000, Math.max(0.1, parseFloat(poolSize)))
+                        setPoolSize(normalized.toFixed(2))
+                      }
+                    }}
+                    aria-invalid={Boolean(errors.poolSize)}
+                    aria-describedby="poolSize-hint poolSize-error"
                     className={`
                       form-input text-lg pl-8 transition-all duration-300
                       ${inputFocus === 'poolSize' ? 'ring-4 ring-blue-300 scale-105' : ''}
                       ${errors.poolSize ? 'border-red-500 ring-4 ring-red-200' : ''}
                     `}
-                    placeholder="10.0"
+                    placeholder="e.g., 10.00"
                   />
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <span className={`text-lg transition-all duration-300 ${
@@ -227,9 +237,9 @@ export default function CreateCircle() {
                     </div>
                   )}
                 </div>
-                <p className="text-sm text-gray-500 mt-1">Each member will deposit this amount per round</p>
+                <p id="poolSize-hint" className="text-sm text-gray-500 mt-1">Each member deposits this per round. Min 0.10, Max 1000.00 FLOW.</p>
                 {errors.poolSize && (
-                  <p className="text-sm text-red-500 mt-1 animate-pulse">{errors.poolSize}</p>
+                  <p id="poolSize-error" className="text-sm text-red-500 mt-1 animate-pulse">{errors.poolSize}</p>
                 )}
               </div>
 
@@ -243,9 +253,12 @@ export default function CreateCircle() {
                     value={members} 
                     min={3} 
                     max={10} 
+                    inputMode="numeric"
                     onChange={e => setMembers(parseInt(e.target.value) || 3)}
                     onFocus={() => setInputFocus('members')}
                     onBlur={() => setInputFocus(null)}
+                    aria-invalid={Boolean(errors.members)}
+                    aria-describedby="members-hint members-error"
                     className={`
                       form-input text-lg pl-8 transition-all duration-300
                       ${inputFocus === 'members' ? 'ring-4 ring-blue-300 scale-105' : ''}
@@ -263,9 +276,9 @@ export default function CreateCircle() {
                     </div>
                   )}
                 </div>
-                <p className="text-sm text-gray-500 mt-1">Number of members who can join this circle (3-10)</p>
+                <p id="members-hint" className="text-sm text-gray-500 mt-1">Number of members who can join this circle (3–10).</p>
                 {errors.members && (
-                  <p className="text-sm text-red-500 mt-1 animate-pulse">{errors.members}</p>
+                  <p id="members-error" className="text-sm text-red-500 mt-1 animate-pulse">{errors.members}</p>
                 )}
               </div>
 
@@ -304,7 +317,7 @@ export default function CreateCircle() {
                      currentStep === 3 ? 'Processing...' : 'Creating Circle...'}
                   </div>
                 ) : (
-                  '🚀 Create Circle'
+                  '🚀 Create Circle Now'
                 )}
               </button>
 
