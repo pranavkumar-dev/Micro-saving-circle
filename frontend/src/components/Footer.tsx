@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-primary-700 via-secondary-700 to-accent-700 border-t-2 border-white/30 text-white">
+    <footer className="bg-white/90 backdrop-blur supports-backdrop-blur:bg-white/80 border-t border-gray-200 text-gray-700">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -41,25 +41,25 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-semibold mb-3 text-white/80">Quick Links</h3>
+            <h3 className="text-sm font-semibold mb-3 text-gray-800">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-white/70 hover:text-yellow-300 transition-all duration-200 text-sm hover:scale-105 inline-block">
+                <Link to="/" className="text-gray-600 hover:text-yellow-700 transition-all duration-200 text-sm hover:scale-105 inline-block">
                   🏠 Home
                 </Link>
               </li>
               <li>
-                <Link to="/create" className="text-white/70 hover:text-green-300 transition-all duration-200 text-sm hover:scale-105 inline-block">
+                <Link to="/create" className="text-gray-600 hover:text-green-700 transition-all duration-200 text-sm hover:scale-105 inline-block">
                   🚀 Create Circle
                 </Link>
               </li>
               <li>
-                <Link to="/join" className="text-white/70 hover:text-pink-300 transition-all duration-200 text-sm hover:scale-105 inline-block">
+                <Link to="/join" className="text-gray-600 hover:text-pink-700 transition-all duration-200 text-sm hover:scale-105 inline-block">
                   🔍 Join Circle
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard" className="text-white/70 hover:text-blue-300 transition-all duration-200 text-sm hover:scale-105 inline-block">
+                <Link to="/dashboard" className="text-gray-600 hover:text-blue-700 transition-all duration-200 text-sm hover:scale-105 inline-block">
                   📊 Dashboard
                 </Link>
               </li>
@@ -68,24 +68,24 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-white/30 pt-4">
+        <div className="border-t border-gray-200 pt-4">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
-            <div className="text-white/70 text-xs">
+            <div className="text-gray-500 text-xs">
               © 2024 Micro-Savings Circles. All rights reserved.
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex space-x-3 text-xs">
-                <a href="#" className="text-white/70 hover:text-yellow-300 transition-all duration-200 hover:scale-105">
+                <a href="#" className="text-gray-600 hover:text-yellow-700 transition-all duration-200 hover:scale-105">
                   Privacy
                 </a>
-                <a href="#" className="text-white/70 hover:text-pink-300 transition-all duration-200 hover:scale-105">
+                <a href="#" className="text-gray-600 hover:text-pink-700 transition-all duration-200 hover:scale-105">
                   Terms
                 </a>
-                <a href="#" className="text-white/70 hover:text-green-300 transition-all duration-200 hover:scale-105">
+                <a href="#" className="text-gray-600 hover:text-green-700 transition-all duration-200 hover:scale-105">
                   Support
                 </a>
               </div>
-              <div className="text-white/60 text-xs bg-white/10 px-2 py-1 rounded backdrop-blur-sm border border-white/20">
+              <div className="text-gray-600 text-xs bg-gray-100 px-2 py-1 rounded border border-gray-200">
                 Built on Flow
               </div>
             </div>
