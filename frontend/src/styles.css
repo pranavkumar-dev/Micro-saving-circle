@@ -10,7 +10,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #0ea5a2 0%, #22c55e 100%);
+  /* Soft light background for finance-friendly minimal look */
+  background: linear-gradient(135deg, #fffdf5 0%, #fff7cc 100%);
   min-height: 100vh;
 }
 
