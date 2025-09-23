@@ -39,17 +39,17 @@ export default function App() {
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 floating">
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 floating">
               Welcome to <span className="rainbow-text">Micro-Savings Circles</span>
             </h1>
-            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
               Join trustless savings groups, make regular deposits, and take turns receiving the pooled payout. 
               Built on Flow blockchain for secure, transparent community finance.
             </p>
             
             {!user?.addr ? (
               <div className="mb-12">
-                <p className="text-lg text-white/80 mb-6">Connect your wallet to get started</p>
+                <p className="text-lg text-gray-700 mb-6">Connect your wallet to get started</p>
                 <button 
                   onClick={handleConnect}
                   disabled={isConnecting}
@@ -94,22 +94,22 @@ export default function App() {
       <div className="py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4 rainbow-text drop-shadow-lg">Platform Statistics</h2>
-            <p className="text-lg text-white/90 drop-shadow-md">Join thousands of users building wealth together</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 rainbow-text drop-shadow-lg">Platform Statistics</h2>
+            <p className="text-lg text-gray-700 drop-shadow-md">Join thousands of users building wealth together</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="glass-card text-center p-8 floating">
               <div className="text-5xl font-bold text-primary-400 mb-3 glow-effect">{stats.totalCircles}</div>
-              <div className="text-lg text-white font-semibold">Active Circles</div>
+              <div className="text-lg text-gray-800 font-semibold">Active Circles</div>
             </div>
             <div className="glass-card text-center p-8 floating" style={{ animationDelay: '0.3s' }}>
               <div className="text-5xl font-bold text-success-400 mb-3 glow-effect">{stats.activeMembers}</div>
-              <div className="text-lg text-white font-semibold">Active Members</div>
+              <div className="text-lg text-gray-800 font-semibold">Active Members</div>
             </div>
             <div className="glass-card text-center p-8 floating" style={{ animationDelay: '0.6s' }}>
               <div className="text-5xl font-bold text-secondary-400 mb-3 glow-effect">{stats.totalDeposits}</div>
-              <div className="text-lg text-white font-semibold">Total Deposits (FLOW)</div>
+              <div className="text-lg text-gray-800 font-semibold">Total Deposits (FLOW)</div>
             </div>
           </div>
         </div>
@@ -119,8 +119,8 @@ export default function App() {
       <div className="py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4 rainbow-text drop-shadow-lg">How It Works</h2>
-            <p className="text-lg text-white/90 drop-shadow-md">Simple, secure, and transparent savings circles</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 rainbow-text drop-shadow-lg">How It Works</h2>
+            <p className="text-lg text-gray-700 drop-shadow-md">Simple, secure, and transparent savings circles</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -128,24 +128,24 @@ export default function App() {
               <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-6 glow-effect">
                 <span className="text-3xl">👥</span>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-4">Create or Join</h3>
-              <p className="text-white/80 leading-relaxed">Start a new savings circle or join an existing one with your preferred pool size and member count.</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Create or Join</h3>
+              <p className="text-gray-700 leading-relaxed">Start a new savings circle or join an existing one with your preferred pool size and member count.</p>
             </div>
             
             <div className="glass-card text-center p-8 floating" style={{ animationDelay: '0.3s' }}>
               <div className="w-20 h-20 bg-gradient-to-br from-success-400 to-success-600 rounded-full flex items-center justify-center mx-auto mb-6 glow-effect">
                 <span className="text-3xl">💰</span>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-4">Regular Deposits</h3>
-              <p className="text-white/80 leading-relaxed">Make scheduled deposits each round. The smart contract tracks who has paid and who hasn't.</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Regular Deposits</h3>
+              <p className="text-gray-700 leading-relaxed">Make scheduled deposits each round. The smart contract tracks who has paid and who hasn't.</p>
             </div>
             
             <div className="glass-card text-center p-8 floating" style={{ animationDelay: '0.6s' }}>
               <div className="w-20 h-20 bg-gradient-to-br from-secondary-400 to-secondary-600 rounded-full flex items-center justify-center mx-auto mb-6 glow-effect">
                 <span className="text-3xl">🎯</span>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-4">Rotating Payouts</h3>
-              <p className="text-white/80 leading-relaxed">Once all members deposit, one member receives the full pool. The cycle continues until everyone gets paid.</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Rotating Payouts</h3>
+              <p className="text-gray-700 leading-relaxed">Once all members deposit, one member receives the full pool. The cycle continues until everyone gets paid.</p>
             </div>
           </div>
         </div>
@@ -155,8 +155,8 @@ export default function App() {
       <div className="py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="glass-card p-12">
-            <h2 className="text-4xl font-bold text-white mb-6 rainbow-text drop-shadow-lg">Ready to Start Saving?</h2>
-            <p className="text-xl text-white/90 mb-8 drop-shadow-md">Join the future of community finance today</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6 rainbow-text drop-shadow-lg">Ready to Start Saving?</h2>
+            <p className="text-xl text-gray-700 mb-8 drop-shadow-md">Join the future of community finance today</p>
             
             {user?.addr ? (
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
